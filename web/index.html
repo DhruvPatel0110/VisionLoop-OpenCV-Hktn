@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VisionLoop - Autonomous OpenCV 5 Workload Tuning Agent and AI Engineering Workstation.">
+  <title>VisionLoop | Autonomous OpenCV 5 Engineering Workstation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+  <!-- ========================================================================= -->
+  <!-- TOP NAVIGATION HEADER                                                     -->
+  <!-- ========================================================================= -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <!-- Futuristic Geometric Logo -->
+      <div class="logo-mark">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 19.5H22L12 2Z" stroke="url(#logo-grad-1)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M12 7L6 17.5H18L12 7Z" fill="url(#logo-grad-2)" opacity="0.6"/>
+          <defs>
+            <linearGradient id="logo-grad-1" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00D9FF"/>
+              <stop offset="0.5" stop-color="#2388FF"/>
+              <stop offset="1" stop-color="#8B5CF6"/>
+            </linearGradient>
+            <linearGradient id="logo-grad-2" x1="6" y1="7" x2="18" y2="18" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00D9FF"/>
+              <stop offset="1" stop-color="#8B5CF6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="brand-info">
+        <div class="brand-row">
+          <span class="brand-title">VisionLoop</span>
+        </div>
+        <span class="brand-subtitle">Autonomous OpenCV 5 Workload Tuning Agent</span>
+      </div>
+    </div>
+
+    <!-- Right Header Badges -->
+    <div class="nav-right">
+      <div class="status-pill pill-opencv" title="Verified OpenCV 5.0.0 CPU Engine">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/>
+        </svg>
+        <span id="headerOpencvVersion">OpenCV 5.0</span>
+      </div>
+
+      <div class="status-pill pill-aws" id="headerAwsPill" title="AWS Cloud Compute Target">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M8 19h8"/>
+        </svg>
+        <span id="headerAwsStatus">AWS GRAVITON</span>
+      </div>
+
+      <div class="status-pill pill-agent" id="headerAgentPill">
+        <span class="pulse-dot"></span>
+        <span id="headerAgentStatus">AGENT ONLINE</span>
+      </div>
+
+      <div class="user-avatar" title="VisionLoop Administrator">AK</div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN LAYOUT: SIDEBAR + CONTENT                                            -->
+  <!-- ========================================================================= -->
+  <div class="layout-body">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="overview">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          </svg>
+          <span>Overview</span>
+        </button>
+
+        <button class="nav-item" data-view="experiments">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 2v7.31L4.69 17.5A2 2 0 0 0 6.34 21h11.32a2 2 0 0 0 1.65-3.5L14 9.31V2h-4z"/>
+          </svg>
+          <span>Experiments</span>
+        </button>
+
+        <button class="nav-item" data-view="datasets">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+          <span>Datasets</span>
+        </button>
+
+        <button class="nav-item" data-view="evaluation">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          <span>Evaluation</span>
+        </button>
+
+        <button class="nav-item" data-view="audit">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span>Audit Trail</span>
+        </button>
+
+        <button class="nav-item" data-view="settings">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <!-- Bottom Sidebar Card: Current Session -->
+      <div class="sidebar-widget">
+        <div class="widget-header">
+          <span class="widget-title">Current Session</span>
+          <span class="widget-status" id="sidebarStatusText">
+            <span class="pulse-dot-sm"></span> Agent Ready
+          </span>
+        </div>
+        <div class="widget-details">
+          <div class="detail-row">
+            <span class="detail-key">Dataset</span>
+            <span class="detail-val" id="sidebarDatasetName">sample_04_low_contrast</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Compute</span>
+            <span class="detail-val" id="sidebarComputeTarget">Local CPU → AWS</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Iterations</span>
+            <span class="detail-val" id="sidebarIterationsCount">5 / 5</span>
+          </div>
+        </div>
+        <button class="btn-stop-experiment" id="stopExperimentBtn" title="Halt current loop">
+          <span class="stop-icon">■</span> Stop Experiment
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT VIEW AREA -->
+    <main class="main-content" id="mainContent">
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 1: OVERVIEW DASHBOARD (PRIMARY WORKSTATION)                      -->
+      <!-- ===================================================================== -->
+      <div class="view-panel active" id="viewOverview">
+
+        <!-- HERO HEADER -->
+        <section class="hero-header">
+          <div class="hero-text">
+            <h1 class="hero-title">Vision intelligence, <span class="gradient-text">optimized.</span></h1>
+            <p class="hero-subtitle">Adaptive computer-vision experiments with evidence-backed decisions.</p>
+          </div>
+          <div class="hero-actions">
+            <div class="session-capsule">
+              <div class="capsule-date" id="heroSessionDate">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span id="heroDateText">Oct 25, 2026</span> | <span id="heroSessionId">Session #01</span>
+              </div>
+              <span class="capsule-task" id="heroTaskSubtitle">Edge Detection Tuning</span>
+            </div>
+
+            <button class="btn-new-experiment" id="openNewExperimentBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              <span>New Experiment</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- KPI METRIC CARDS -->
+        <section class="kpi-grid">
+          <!-- KPI 1: BEST QUALITY -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon-wrap icon-cyan">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              </div>
+              <span class="kpi-label">BEST QUALITY</span>
+              <!-- Sparkline SVG -->
+              <svg class="kpi-sparkline" width="60" height="24" viewBox="0 0 60 24" fill="none">
+                <path d="M2 20C12 18 18 12 28 14C38 16 45 4 58 4" stroke="#00D9FF" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="58" cy="4" r="2.5" fill="#00D9FF"/>
+              </svg>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-number" id="kpiBestQuality">100.0%</span>
+              <div class="kpi-delta-row">
+                <span class="delta-badge delta-pos" id="kpiQualityDelta">▲ +100%</span>
+                <span class="delta-text" id="kpiQualitySubtext">Edge F1 Score (↑ better)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 2: LATENCY -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon-wrap icon-blue">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+              </div>
+              <span class="kpi-label">LATENCY</span>
+              <!-- Sparkline SVG -->
+              <svg class="kpi-sparkline" width="60" height="24" viewBox="0 0 60 24" fill="none">
+                <path d="M2 6C15 6 22 18 35 16C45 14 50 20 58 20" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="58" cy="20" r="2.5" fill="#8B5CF6"/>
+              </svg>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-number" id="kpiLatency">1.18 ms</span>
+              <div class="kpi-delta-row">
+                <span class="delta-badge delta-pos" id="kpiLatencyDelta">▼ -20.3%</span>
+                <span class="delta-text">Median per image (↓ better)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 3: EXPERIMENTS -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon-wrap icon-purple">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 2v7.31L4.69 17.5A2 2 0 0 0 6.34 21h11.32a2 2 0 0 0 1.65-3.5L14 9.31V2h-4z"/>
+                </svg>
+              </div>
+              <span class="kpi-label">EXPERIMENTS</span>
+              <!-- Mini Bar Chart -->
+              <div class="kpi-bars">
+                <span class="bar-col" style="height: 40%"></span>
+                <span class="bar-col" style="height: 65%"></span>
+                <span class="bar-col" style="height: 35%"></span>
+                <span class="bar-col active-bar" style="height: 90%"></span>
+              </div>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-number" id="kpiExperimentsTotal">05</span>
+              <div class="kpi-delta-row">
+                <span class="delta-text-sub" id="kpiValidRejectedText">3 valid / 2 rejected</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 4: IMPROVEMENT -->
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-icon-wrap icon-green">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+              </div>
+              <span class="kpi-label">IMPROVEMENT</span>
+              <!-- Glowing Curve -->
+              <svg class="kpi-sparkline" width="60" height="24" viewBox="0 0 60 24" fill="none">
+                <path d="M2 22C20 22 35 12 58 4" stroke="#00E5A8" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="58" cy="4" r="3" fill="#00E5A8" filter="url(#glow)"/>
+                <defs>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+              </svg>
+            </div>
+            <div class="kpi-body">
+              <span class="kpi-number accent-cyan" id="kpiImprovement">+25.5%</span>
+              <div class="kpi-delta-row">
+                <span class="delta-text-sub" id="kpiImprovementSub">Composite Score</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MIDDLE ROW: LIVE EXPERIMENT STEPPER + AGENT REASONING -->
+        <section class="middle-grid">
+          <!-- LIVE EXPERIMENT STEPPER PANEL -->
+          <div class="dash-panel live-experiment-panel">
+            <div class="panel-top-row">
+              <div class="panel-title-group">
+                <div class="radar-icon">
+                  <span class="radar-ring"></span>
+                  <span class="radar-dot"></span>
+                </div>
+                <div>
+                  <h2 class="panel-heading">Live Experiment</h2>
+                  <p class="panel-subheading">Agent is iteratively tuning OpenCV 5 parameters based on visual feedback and metrics.</p>
+                </div>
+              </div>
+              <div class="panel-top-badges">
+                <span class="iter-counter-pill" id="stepperIterationText">Iteration 05 / 05</span>
+                <span class="live-pill" id="stepperLiveStatus">
+                  <span class="live-dot"></span> <span id="stepperLiveLabel">Ready</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- 4-Stage Stepper Pipeline -->
+            <div class="stepper-track" id="stepperTrack">
+              <!-- STAGE 1: BASELINE -->
+              <div class="step-node step-completed" id="stepNode1">
+                <div class="node-indicator">
+                  <span class="node-dot"></span>
+                </div>
+                <div class="node-meta">
+                  <span class="node-title">BASELINE</span>
+                  <span class="node-desc">Run default parameters</span>
+                  <span class="node-stat" id="step1Stat">1.48 ms | 0.00 F1</span>
+                </div>
+              </div>
+
+              <div class="step-connector connector-solid"></div>
+
+              <!-- STAGE 2: EVALUATE -->
+              <div class="step-node step-completed" id="stepNode2">
+                <div class="node-indicator">
+                  <span class="node-dot"></span>
+                </div>
+                <div class="node-meta">
+                  <span class="node-title">EVALUATE</span>
+                  <span class="node-desc">Analyze output quality</span>
+                  <span class="node-stat" id="step2Stat">1.00 edge recall</span>
+                </div>
+              </div>
+
+              <div class="step-connector connector-solid"></div>
+
+              <!-- STAGE 3: ADJUST PARAMETERS -->
+              <div class="step-node step-active" id="stepNode3">
+                <div class="node-indicator">
+                  <span class="node-pulse-ring"></span>
+                  <span class="node-dot"></span>
+                </div>
+                <div class="node-meta">
+                  <span class="node-title">ADJUST PARAMETERS</span>
+                  <span class="node-desc">Modify Canny thresholds</span>
+                  <span class="node-stat" id="step3Stat">low: 25, high: 50</span>
+                </div>
+              </div>
+
+              <div class="step-connector connector-dotted"></div>
+
+              <!-- STAGE 4: VALIDATE -->
+              <div class="step-node step-upcoming" id="stepNode4">
+                <div class="node-indicator">
+                  <span class="node-ring"></span>
+                </div>
+                <div class="node-meta">
+                  <span class="node-title">VALIDATE</span>
+                  <span class="node-desc">Run & compare metrics</span>
+                  <span class="node-stat" id="step4Stat">Checking...</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Run Status & Stopping Reason Banner -->
+            <div class="stepper-summary-bar" id="stepperSummaryBar">
+              <span class="summary-icon" id="summaryIcon">⚡</span>
+              <span class="summary-text" id="stepperSummaryText">Optimization Ready. Select a preset or upload an image to begin.</span>
+            </div>
+          </div>
+
+          <!-- AGENT REASONING STREAM PANEL -->
+          <div class="dash-panel reasoning-panel">
+            <div class="panel-top-row">
+              <div class="panel-title-group">
+                <div class="brain-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2">
+                    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z"/>
+                    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="panel-heading">Agent reasoning</h2>
+                </div>
+              </div>
+              <button class="btn-link" id="viewFullLogBtn">
+                <span>View full log</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Event Stream -->
+            <div class="reasoning-feed" id="reasoningFeed">
+              <!-- Event 1 -->
+              <div class="reasoning-item item-warning">
+                <div class="reasoning-marker marker-red">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <div class="reasoning-body">
+                  <span class="reasoning-headline">Edge recall below target (0.00 &lt; 0.70)</span>
+                  <span class="reasoning-sub">Detected zero edges; subtle low-contrast boundaries missed</span>
+                </div>
+                <span class="reasoning-time">14:28:31</span>
+              </div>
+
+              <!-- Event 2 -->
+              <div class="reasoning-item item-action">
+                <div class="reasoning-marker marker-blue">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                  </svg>
+                </div>
+                <div class="reasoning-body">
+                  <span class="reasoning-headline">Lowering Canny thresholds aggressively</span>
+                  <span class="reasoning-sub">low: 50 → 20, high: 150 → 52 (recover subtle boundaries)</span>
+                </div>
+                <span class="reasoning-time">14:28:32</span>
+              </div>
+
+              <!-- Event 3 -->
+              <div class="reasoning-item item-experiment">
+                <div class="reasoning-marker marker-purple">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M10 2v7.31L4.69 17.5A2 2 0 0 0 6.34 21h11.32a2 2 0 0 0 1.65-3.5L14 9.31V2h-4z"/>
+                  </svg>
+                </div>
+                <div class="reasoning-body">
+                  <span class="reasoning-headline">Testing next configuration</span>
+                  <span class="reasoning-sub">Running OpenCV 5 Canny with updated parameters</span>
+                </div>
+                <span class="reasoning-time">14:28:33</span>
+              </div>
+
+              <!-- Event 4 -->
+              <div class="reasoning-item item-eval">
+                <div class="reasoning-marker marker-cyan">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="1"/>
+                    <circle cx="19" cy="12" r="1"/>
+                    <circle cx="5" cy="12" r="1"/>
+                  </svg>
+                </div>
+                <div class="reasoning-body">
+                  <span class="reasoning-headline">Evaluating output...</span>
+                  <span class="reasoning-sub">Computing quality metrics (F1, edge density, noise)</span>
+                </div>
+                <span class="reasoning-time">14:28:33</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISUAL COMPARISON WORKSPACE (4-PANEL CENTERPIECE) -->
+        <section class="dash-panel comparison-panel">
+          <div class="panel-top-row">
+            <div class="panel-title-group">
+              <div class="gallery-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="panel-heading">Visual comparison</h2>
+                <p class="panel-subheading">Input image, baseline output, best validated result, and reference (ground truth).</p>
+              </div>
+            </div>
+
+            <!-- Pagination & Zoom Controls -->
+            <div class="comparison-controls">
+              <div class="pagination-capsule">
+                <button class="btn-pag" id="prevImageBtn" title="Previous benchmark image">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <span class="pag-text" id="pagImageText">Image 4/5</span>
+                <button class="btn-pag" id="nextImageBtn" title="Next benchmark image">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+
+              <button class="btn-icon-square" id="expandComparisonBtn" title="Expand Fullscreen Lightbox">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4-Card Image Grid -->
+          <div class="visual-comparison-grid">
+            <!-- Panel 1: Input Image -->
+            <div class="comp-card">
+              <div class="comp-card-header">
+                <span>INPUT IMAGE</span>
+              </div>
+              <div class="comp-img-wrapper" id="wrapOriginal">
+                <img id="viewImgOriginal" src="" alt="Input Original Image">
+              </div>
+              <div class="comp-card-footer" id="metaOriginal">512 × 512 | RGB</div>
+            </div>
+
+            <!-- Panel 2: Baseline Edges -->
+            <div class="comp-card">
+              <div class="comp-card-header">
+                <span>BASELINE EDGES</span>
+              </div>
+              <div class="comp-img-wrapper" id="wrapBaseline">
+                <img id="viewImgBaseline" src="" alt="Baseline Output">
+              </div>
+              <div class="comp-card-footer" id="metaBaseline">Canny (50, 150) | 1.48 ms</div>
+            </div>
+
+            <!-- Panel 3: Best Validated (Prominent Glow + Crown Badge) -->
+            <div class="comp-card card-best-validated" id="cardBest">
+              <div class="comp-card-header header-best" id="headerBest">
+                <span class="best-title" id="titleBest">BEST VALIDATED</span>
+                <div class="header-best-right">
+                  <button class="btn-reset-winner hidden" id="resetWinnerBtn" title="Reset view to winner">↺ Winner</button>
+                  <span class="selected-pill" id="badgeBest">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    Selected
+                  </span>
+                </div>
+              </div>
+              <div class="comp-img-wrapper" id="wrapBest">
+                <img id="viewImgBest" src="" alt="Best Validated Candidate">
+                <div class="no-winner-placeholder hidden" id="noWinnerPlaceholder">
+                  <span class="placeholder-icon">⚠️</span>
+                  <span class="placeholder-title">No Valid Candidate Found</span>
+                  <span class="placeholder-sub" id="noWinnerSub">No candidate met the quality guardrail.</span>
+                </div>
+              </div>
+              <div class="comp-card-footer footer-best" id="metaBest">Canny (25, 50) + Blur | 1.18 ms</div>
+            </div>
+
+            <!-- Panel 4: Reference Ground Truth -->
+            <div class="comp-card" id="cardReference">
+              <div class="comp-card-header">
+                <span id="titleReference">REFERENCE (GROUND TRUTH)</span>
+              </div>
+              <div class="comp-img-wrapper" id="wrapReference">
+                <img id="viewImgReference" src="" alt="Ground Truth Edge Map">
+                <div class="no-ref-placeholder hidden" id="noRefPlaceholder">
+                  <span class="placeholder-icon">ℹ️</span>
+                  <span class="placeholder-title">No Ground-Truth Reference</span>
+                  <span class="placeholder-sub">Unlabelled image. Quality evaluated using continuity &amp; noise proxy metrics.</span>
+                </div>
+              </div>
+              <div class="comp-card-footer" id="metaReference">Annotated edges | F1 reference</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BOTTOM ROW: QUALITY VS LATENCY CHART + EXPERIMENT HISTORY TABLE -->
+        <section class="bottom-grid">
+          <!-- QUALITY VS LATENCY SCATTER CHART -->
+          <div class="dash-panel chart-panel">
+            <div class="panel-top-row">
+              <div class="panel-title-group">
+                <div class="chart-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2">
+                    <path d="M3 3v18h18"/>
+                    <circle cx="9" cy="9" r="2"/>
+                    <circle cx="16" cy="5" r="2"/>
+                    <circle cx="12" cy="14" r="2"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="panel-heading">Quality vs. Latency</h2>
+                  <p class="panel-subheading">Trade-off between output quality and inference time across experiments.</p>
+                </div>
+              </div>
+
+              <!-- Chart Legend -->
+              <div class="chart-legend">
+                <span class="legend-item"><span class="legend-dot dot-valid"></span> Valid</span>
+                <span class="legend-item"><span class="legend-dot dot-rejected"></span> Rejected</span>
+                <span class="legend-item"><span class="legend-dot dot-baseline"></span> Baseline</span>
+              </div>
+            </div>
+
+            <!-- SVG Scatter Chart Area -->
+            <div class="scatter-chart-wrap" id="scatterChartWrap">
+              <svg id="scatterChartSvg" viewBox="0 0 520 220" width="100%" height="100%">
+                <!-- Grid Lines (Mathematically aligned: y = 190 - (score * 170)) -->
+                <line x1="45" y1="20" x2="495" y2="20" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                <line x1="45" y1="54" x2="495" y2="54" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                <line x1="45" y1="88" x2="495" y2="88" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                <line x1="45" y1="122" x2="495" y2="122" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                <line x1="45" y1="156" x2="495" y2="156" stroke="rgba(255,255,255,0.06)" stroke-dasharray="3 3"/>
+                <line x1="45" y1="190" x2="495" y2="190" stroke="rgba(255,255,255,0.15)"/>
+                <line x1="45" y1="15" x2="45" y2="190" stroke="rgba(255,255,255,0.15)"/>
+
+                <!-- Y Axis Labels -->
+                <text x="35" y="24" fill="#64748B" font-size="10" text-anchor="end" font-family="JetBrains Mono">1.0</text>
+                <text x="35" y="58" fill="#64748B" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.8</text>
+                <text x="35" y="92" fill="#64748B" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.6</text>
+                <text x="35" y="126" fill="#64748B" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.4</text>
+                <text x="35" y="160" fill="#64748B" font-size="10" text-anchor="end" font-family="JetBrains Mono">0.2</text>
+
+                <!-- X Axis Labels (Log scale: 1, 10, 100, 1000 ms) -->
+                <text x="45" y="206" fill="#64748B" font-size="10" text-anchor="middle" font-family="JetBrains Mono">1</text>
+                <text x="195" y="206" fill="#64748B" font-size="10" text-anchor="middle" font-family="JetBrains Mono">10</text>
+                <text x="345" y="206" fill="#64748B" font-size="10" text-anchor="middle" font-family="JetBrains Mono">100</text>
+                <text x="495" y="206" fill="#64748B" font-size="10" text-anchor="middle" font-family="JetBrains Mono">1000</text>
+
+                <text x="270" y="218" fill="#64748B" font-size="10" text-anchor="middle">Latency (ms, log scale)</text>
+                <text x="12" y="105" fill="#64748B" font-size="10" text-anchor="middle" transform="rotate(-90 12 105)" id="chartYAxisLabel">Quality (Edge F1)</text>
+
+                <!-- Dynamic Scatter Points Group -->
+                <g id="chartPointsGroup"></g>
+              </svg>
+
+              <!-- Chart Empty State -->
+              <div class="chart-empty-state hidden" id="chartEmptyState">
+                No experiment measurements available.
+              </div>
+
+              <!-- Floating Tooltip -->
+              <div class="chart-tooltip hidden" id="chartTooltip">
+                <span class="tooltip-title" id="tooltipTitle">#05 (Best)</span>
+                <span class="tooltip-line" id="tooltipQuality">Quality: 100.0%</span>
+                <span class="tooltip-line" id="tooltipLatency">Latency: 1.18 ms</span>
+                <span class="tooltip-config" id="tooltipConfig">Canny (25, 50)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXPERIMENT HISTORY TABLE -->
+          <div class="dash-panel history-panel">
+            <div class="panel-top-row">
+              <div class="panel-title-group">
+                <div class="table-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"/>
+                    <line x1="8" y1="12" x2="21" y2="12"/>
+                    <line x1="8" y1="18" x2="21" y2="18"/>
+                    <line x1="3" y1="6" x2="3.01" y2="6"/>
+                    <line x1="3" y1="12" x2="3.01" y2="12"/>
+                    <line x1="3" y1="18" x2="3.01" y2="18"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 class="panel-heading">Experiment history</h2>
+                  <p class="panel-subheading">All experiments with parameters, metrics, and decisions.</p>
+                </div>
+              </div>
+              <button class="btn-link" id="viewAllHistoryBtn">
+                <span>View all</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+
+            <!-- Table -->
+            <div class="history-table-wrapper">
+              <table class="history-table" id="historyTable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>PREVIEW</th>
+                    <th>PARAMETERS (CANNY)</th>
+                    <th>LATENCY</th>
+                    <th id="thQualityHeader">EDGE F1</th>
+                    <th>Δ VS BASELINE</th>
+                    <th>STATUS</th>
+                  </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                  <!-- Dynamically populated rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- END VIEW OVERVIEW -->
+
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 2: EXPERIMENTS (FULL SESSIONS BROWSER)                            -->
+      <!-- ===================================================================== -->
+      <div class="view-panel" id="viewExperiments">
+        <div class="subview-header">
+          <div>
+            <h1 class="subview-title">Experiment Archive &amp; Benchmark Runs</h1>
+            <p class="subview-sub">Complete history of all autonomous optimization loops and AWS cloud traces.</p>
+          </div>
+          <button class="btn-primary-action" id="subviewNewExpBtn">+ New Experiment</button>
+        </div>
+
+        <div class="dash-panel">
+          <div class="archive-list" id="archiveList">
+            <!-- Dynamically populated sessions -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 3: DATASETS                                                      -->
+      <!-- ===================================================================== -->
+      <div class="view-panel" id="viewDatasets">
+        <div class="subview-header">
+          <div>
+            <h1 class="subview-title">Curated Benchmark Datasets</h1>
+            <p class="subview-sub">Standardized static image test suite with verified ground-truth reference edge maps.</p>
+          </div>
+        </div>
+        <div class="datasets-grid" id="datasetsGrid">
+          <!-- Dynamically populated dataset cards -->
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 4: EVALUATION METHODOLOGY                                        -->
+      <!-- ===================================================================== -->
+      <div class="view-panel" id="viewEvaluation">
+        <div class="subview-header">
+          <div>
+            <h1 class="subview-title">Grounded Evaluation Methodology</h1>
+            <p class="subview-sub">Mathematical formulation of Ground Truth F1, morphological tolerance dilation, and proxy metrics.</p>
+          </div>
+        </div>
+        <div class="dash-panel eval-docs-panel">
+          <div class="eval-grid">
+            <div class="eval-card">
+              <h3>1. Ground Truth F1 Score</h3>
+              <p>For images with verified ground-truth references, we calculate Precision and Recall using a 1-pixel morphological tolerance window (BSDS standard practice):</p>
+              <code>Precision = |E_cand ∩ Dilate(E_ref, 1px)| / |E_cand|</code>
+              <code>Recall = |E_ref ∩ Dilate(E_cand, 1px)| / |E_ref|</code>
+              <code>F1 = 2 × (Precision × Recall) / (Precision + Recall)</code>
+            </div>
+
+            <div class="eval-card">
+              <h3>2. Unlabelled Proxy Quality</h3>
+              <p>For unlabelled images where reference edge maps are unavailable, three proxy metrics prevent degraded configurations:</p>
+              <ul>
+                <li><b>Edge Continuity:</b> Connected components ratio penalizing fragmented edge dust.</li>
+                <li><b>Noise Ratio:</b> Fraction of isolated single-pixel edge noise.</li>
+                <li><b>Density Fitness:</b> Checks that edge density stays within natural boundaries (0.5% - 10%).</li>
+              </ul>
+            </div>
+
+            <div class="eval-card">
+              <h3>3. High-Precision Timing Harness</h3>
+              <p>To eliminate CPU thermal throttling and operating system scheduler jitter:</p>
+              <code>T_candidate = Median(Pass_1, Pass_2, ..., Pass_5) after 3 Warmup passes</code>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 5: AUDIT TRAIL                                                   -->
+      <!-- ===================================================================== -->
+      <div class="view-panel" id="viewAudit">
+        <div class="subview-header">
+          <div>
+            <h1 class="subview-title">Decision Audit Trail</h1>
+            <p class="subview-sub">Chronological, immutable audit record of perception-action cycles and parameter transitions.</p>
+          </div>
+          <div class="audit-actions">
+            <button class="btn-secondary-action" id="auditDownloadJsonBtn">Download Full Trace (.json)</button>
+            <button class="btn-secondary-action" id="auditDownloadMdBtn">Download Full Report (.md)</button>
+          </div>
+        </div>
+        <div class="dash-panel">
+          <pre class="audit-raw-log" id="auditRawLog">Loading audit trail...</pre>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- VIEW 6: SETTINGS                                                      -->
+      <!-- ===================================================================== -->
+      <div class="view-panel" id="viewSettings">
+        <div class="subview-header">
+          <div>
+            <h1 class="subview-title">System &amp; Cloud Configuration</h1>
+            <p class="subview-sub">OpenCV 5 engine status, AWS compute credentials, and deployment telemetry.</p>
+          </div>
+        </div>
+        <div class="dash-panel settings-panel">
+          <div class="settings-form">
+            <div class="setting-group">
+              <label>OpenCV Engine Build</label>
+              <input type="text" class="input-setting" id="settingOpencvBuild" readonly value="OpenCV 5.0.0 (AMD64 CPU Optimized)">
+            </div>
+            <div class="setting-group">
+              <label>AWS Lambda Function URL (Public Endpoint)</label>
+              <input type="text" class="input-setting" id="settingAwsUrl" placeholder="https://<id>.lambda-url.us-east-1.on.aws/">
+              <span class="setting-hint">Direct HTTPS POST endpoint for remote cloud execution</span>
+            </div>
+            <div class="setting-group">
+              <label>AWS Region</label>
+              <input type="text" class="input-setting" id="settingAwsRegion" value="us-east-1" readonly>
+            </div>
+            <div class="setting-group">
+              <label>Cost Safeguards</label>
+              <input type="text" class="input-setting" readonly value="Hard limit: <1MB payload, 15s Lambda timeout, $5.00 CloudWatch alert">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER                                                                    -->
+  <!-- ========================================================================= -->
+  <footer class="bottom-footer">
+    <div class="footer-left">
+      <span class="footer-app">VisionLoop v0.1.0</span>
+      <span class="footer-sep">|</span>
+      <span>Autonomous OpenCV 5 Workload Tuning Agent</span>
+    </div>
+    <div class="footer-right">
+      <span>CPU-first</span>
+      <span class="footer-bullet">•</span>
+      <span>Reproducible runs</span>
+      <span class="footer-bullet">•</span>
+      <span>Full audit trace</span>
+      <span class="footer-bullet">•</span>
+      <span>Built for OpenCV AI Competition 2026</span>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: NEW EXPERIMENT SETUP                                               -->
+  <!-- ========================================================================= -->
+  <div class="modal-overlay hidden" id="newExperimentModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">⚡</span>
+          <h3>Configure &amp; Launch Experiment</h3>
+        </div>
+        <button class="btn-modal-close" id="closeNewExpModalBtn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Preset Picker -->
+        <div class="modal-field">
+          <label>Select Benchmark Preset Dataset:</label>
+          <select class="modal-select" id="modalPresetSelect"></select>
+          <span class="modal-hint" id="modalPresetHint">Curated test image with ground-truth reference</span>
+        </div>
+
+        <!-- Custom Upload -->
+        <div class="modal-field">
+          <label>Or Upload Custom Image:</label>
+          <input type="file" id="modalFileInput" class="modal-file" accept="image/png,image/jpeg">
+          <span class="modal-hint">Max 1024x1024 PNG/JPEG (&lt;1MB)</span>
+        </div>
+
+        <!-- Compute Target Toggle -->
+        <div class="modal-field">
+          <label>Compute Execution Target:</label>
+          <div class="compute-toggle-wrap">
+            <button type="button" class="compute-btn active" id="modalModeLocalBtn">
+              💻 Local CPU (Host)
+            </button>
+            <button type="button" class="compute-btn" id="modalModeAwsBtn">
+              ☁️ AWS Cloud (Lambda Container)
+            </button>
+          </div>
+          <span class="modal-hint" id="modalComputeHint">Runs in-process on host CPU</span>
+        </div>
+
+        <!-- Budget & Quality Sliders -->
+        <div class="modal-field-row">
+          <div class="modal-field">
+            <label>Max Iterations: <b id="modalIterVal">5</b></label>
+            <input type="range" class="modal-slider" id="modalIterRange" min="2" max="8" value="5">
+          </div>
+          <div class="modal-field">
+            <label>Min Quality Guardrail: <b id="modalQualityVal">0.70</b></label>
+            <input type="range" class="modal-slider" id="modalQualityRange" min="0.40" max="0.95" step="0.05" value="0.70">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-cancel" id="cancelNewExpModalBtn">Cancel</button>
+        <button class="btn-modal-launch" id="launchExperimentBtn">
+          <span>▶</span> Launch VisionLoop Agent
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: IMAGE LIGHTBOX ZOOM                                                -->
+  <!-- ========================================================================= -->
+  <div class="modal-overlay hidden" id="lightboxModal">
+    <div class="lightbox-card">
+      <div class="lightbox-header">
+        <h3 id="lightboxTitle">Visual Comparison Lightbox</h3>
+        <button class="btn-modal-close" id="closeLightboxBtn">✕</button>
+      </div>
+      <div class="lightbox-body">
+        <div class="lightbox-grid">
+          <div class="lightbox-pane">
+            <div class="pane-tag">Original Input</div>
+            <img id="lightboxImgOriginal" src="" alt="Original">
+          </div>
+          <div class="lightbox-pane">
+            <div class="pane-tag">Baseline Edges</div>
+            <img id="lightboxImgBaseline" src="" alt="Baseline">
+          </div>
+          <div class="lightbox-pane pane-highlight">
+            <div class="pane-tag">Best Validated Candidate</div>
+            <img id="lightboxImgBest" src="" alt="Best">
+          </div>
+          <div class="lightbox-pane">
+            <div class="pane-tag">Ground Truth Reference</div>
+            <img id="lightboxImgRef" src="" alt="Reference">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
