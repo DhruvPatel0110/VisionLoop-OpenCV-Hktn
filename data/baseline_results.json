@@ -1,0 +1,244 @@
+{
+  "timestamp_utc": "2026-10-25T05:29:53Z",
+  "total_images": 5,
+  "baseline_config": {
+    "low_threshold": 50,
+    "high_threshold": 150,
+    "aperture_size": 3,
+    "l2_gradient": true,
+    "blur_kernel": 5,
+    "blur_sigma": 1.2
+  },
+  "results": [
+    {
+      "image_id": "sample_01",
+      "image_name": "High-Contrast Geometric Shapes",
+      "category": "geometric_clean",
+      "image_path": "data/test_images/sample_01.png",
+      "baseline_output_path": "data/baseline_outputs/sample_01_baseline.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "config": {
+        "low_threshold": 50,
+        "high_threshold": 150,
+        "aperture_size": 3,
+        "l2_gradient": true,
+        "blur_kernel": 5,
+        "blur_sigma": 1.2
+      },
+      "timing": {
+        "median_latency_ms": 2.001,
+        "mean_latency_ms": 2.309,
+        "min_latency_ms": 1.847,
+        "max_latency_ms": 3.345,
+        "std_latency_ms": 0.556,
+        "timed_iterations": 5,
+        "warmup_iterations": 3
+      },
+      "quality": {
+        "has_ground_truth": true,
+        "f1_score": 0.2513,
+        "precision": 0.2087,
+        "recall": 0.3156,
+        "tolerance_pixels": 1,
+        "is_proxy_metric": false,
+        "proxy_score": 0.9676,
+        "edge_density": 0.02135,
+        "edge_continuity": 1.0,
+        "noise_ratio": 0.0
+      },
+      "verdict": {
+        "status": "REJECTED_QUALITY",
+        "is_acceptable": false,
+        "primary_score": 0.2513,
+        "metric_type": "GROUND_TRUTH_F1"
+      }
+    },
+    {
+      "image_id": "sample_02",
+      "image_name": "Smooth Gradient Circles",
+      "category": "soft_gradient",
+      "image_path": "data/test_images/sample_02.png",
+      "baseline_output_path": "data/baseline_outputs/sample_02_baseline.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "config": {
+        "low_threshold": 50,
+        "high_threshold": 150,
+        "aperture_size": 3,
+        "l2_gradient": true,
+        "blur_kernel": 5,
+        "blur_sigma": 1.2
+      },
+      "timing": {
+        "median_latency_ms": 1.371,
+        "mean_latency_ms": 1.362,
+        "min_latency_ms": 1.29,
+        "max_latency_ms": 1.414,
+        "std_latency_ms": 0.0468,
+        "timed_iterations": 5,
+        "warmup_iterations": 3
+      },
+      "quality": {
+        "has_ground_truth": true,
+        "f1_score": 0.621,
+        "precision": 1.0,
+        "recall": 0.4504,
+        "tolerance_pixels": 1,
+        "is_proxy_metric": false,
+        "proxy_score": 0.8969,
+        "edge_density": 0.00251,
+        "edge_continuity": 1.0,
+        "noise_ratio": 0.0
+      },
+      "verdict": {
+        "status": "REJECTED_QUALITY",
+        "is_acceptable": false,
+        "primary_score": 0.621,
+        "metric_type": "GROUND_TRUTH_F1"
+      }
+    },
+    {
+      "image_id": "sample_03_noisy",
+      "image_name": "Textured Noise with Central Badge",
+      "category": "noisy_textured",
+      "image_path": "data/test_images/sample_03_noisy.png",
+      "baseline_output_path": "data/baseline_outputs/sample_03_noisy_baseline.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "config": {
+        "low_threshold": 50,
+        "high_threshold": 150,
+        "aperture_size": 3,
+        "l2_gradient": true,
+        "blur_kernel": 5,
+        "blur_sigma": 1.2
+      },
+      "timing": {
+        "median_latency_ms": 1.858,
+        "mean_latency_ms": 2.139,
+        "min_latency_ms": 1.681,
+        "max_latency_ms": 3.34,
+        "std_latency_ms": 0.6085,
+        "timed_iterations": 5,
+        "warmup_iterations": 3
+      },
+      "quality": {
+        "has_ground_truth": true,
+        "f1_score": 0.8072,
+        "precision": 0.6767,
+        "recall": 1.0,
+        "tolerance_pixels": 1,
+        "is_proxy_metric": false,
+        "proxy_score": 0.9284,
+        "edge_density": 0.01091,
+        "edge_continuity": 1.0,
+        "noise_ratio": 0.0
+      },
+      "verdict": {
+        "status": "ACCEPTED",
+        "is_acceptable": true,
+        "primary_score": 0.8072,
+        "metric_type": "GROUND_TRUTH_F1"
+      }
+    },
+    {
+      "image_id": "sample_04_low_contrast",
+      "image_name": "Low-Light Subtle Boundaries",
+      "category": "low_contrast",
+      "image_path": "data/test_images/sample_04_low_contrast.png",
+      "baseline_output_path": "data/baseline_outputs/sample_04_low_contrast_baseline.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "config": {
+        "low_threshold": 50,
+        "high_threshold": 150,
+        "aperture_size": 3,
+        "l2_gradient": true,
+        "blur_kernel": 5,
+        "blur_sigma": 1.2
+      },
+      "timing": {
+        "median_latency_ms": 1.507,
+        "mean_latency_ms": 1.568,
+        "min_latency_ms": 1.496,
+        "max_latency_ms": 1.819,
+        "std_latency_ms": 0.1256,
+        "timed_iterations": 5,
+        "warmup_iterations": 3
+      },
+      "quality": {
+        "has_ground_truth": true,
+        "f1_score": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "tolerance_pixels": 1,
+        "is_proxy_metric": false,
+        "proxy_score": 0.4875,
+        "edge_density": 0.0,
+        "edge_continuity": 0.0,
+        "noise_ratio": 0.0
+      },
+      "verdict": {
+        "status": "REJECTED_QUALITY",
+        "is_acceptable": false,
+        "primary_score": 0.0,
+        "metric_type": "GROUND_TRUTH_F1"
+      }
+    },
+    {
+      "image_id": "sample_05_fine_detail",
+      "image_name": "Fine Grid and Concentric Rings",
+      "category": "fine_detail",
+      "image_path": "data/test_images/sample_05_fine_detail.png",
+      "baseline_output_path": "data/baseline_outputs/sample_05_fine_detail_baseline.png",
+      "dimensions": [
+        512,
+        512
+      ],
+      "config": {
+        "low_threshold": 50,
+        "high_threshold": 150,
+        "aperture_size": 3,
+        "l2_gradient": true,
+        "blur_kernel": 5,
+        "blur_sigma": 1.2
+      },
+      "timing": {
+        "median_latency_ms": 2.754,
+        "mean_latency_ms": 2.896,
+        "min_latency_ms": 2.591,
+        "max_latency_ms": 3.561,
+        "std_latency_ms": 0.3423,
+        "timed_iterations": 5,
+        "warmup_iterations": 3
+      },
+      "quality": {
+        "has_ground_truth": true,
+        "f1_score": 0.9708,
+        "precision": 0.9432,
+        "recall": 1.0,
+        "tolerance_pixels": 1,
+        "is_proxy_metric": false,
+        "proxy_score": 0.8964,
+        "edge_density": 0.05762,
+        "edge_continuity": 1.0,
+        "noise_ratio": 0.0
+      },
+      "verdict": {
+        "status": "ACCEPTED",
+        "is_acceptable": true,
+        "primary_score": 0.9708,
+        "metric_type": "GROUND_TRUTH_F1"
+      }
+    }
+  ]
+}
