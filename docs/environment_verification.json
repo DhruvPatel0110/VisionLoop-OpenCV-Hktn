@@ -1,0 +1,25 @@
+{
+  "status": "VERIFIED",
+  "timestamp_utc": "2026-10-25T05:16:18Z",
+  "python_version": "3.14.6",
+  "opencv_version": "5.0.0",
+  "platform": {
+    "os": "Windows 10",
+    "architecture": "AMD64",
+    "cpu_cores": 4,
+    "processor": "Intel64 Family 6 Model 78 Stepping 3, GenuineIntel"
+  },
+  "opencv_cpu_config": {
+    "num_threads": 4,
+    "use_optimized": true
+  },
+  "smoke_test": {
+    "synthetic_image_dimensions": [
+      256,
+      256
+    ],
+    "detected_edge_pixels": 1056,
+    "execution_latency_ms": 18.433
+  },
+  "opencv_build_summary": "\nGeneral configuration for OpenCV 5.0.0 =====================================\n  Version control:               5.0.0\n\n  Platform:\n    Timestamp:                   2026-07-01T09:07:40Z\n    Host:                        Windows 10.0.20348 AMD64\n    CMake:                       4.3.2\n    CMake generator:             Visual Studio 17 2022\n    CMake build tool:            C:/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin/amd64/MSBuild.exe\n    MSVC:                        194..."
+}
