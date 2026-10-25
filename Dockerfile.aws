@@ -1,0 +1,27 @@
+# AWS Lambda Container Image for OpenCV 5 Workloads
+# Target: AWS Lambda (x86_64 or Graviton/arm64) CPU compute
+
+FROM public.ecr.aws/lambda/python:3.11
+
+# Set working directory to Lambda task root
+WORKDIR ${LAMBDA_TASK_ROOT}
+
+# Install system dependencies required for OpenCV
+RUN yum update -y && \
+    yum install -y mesa-libGL glib2 libXext libSM libXrender && \
+    yum clean all
+
+# Copy requirements and install
+COPY requirements.txt .
+
+# Install dependencies (pinned OpenCV 5 headless, numpy, pydantic)
+RUN pip install --no-cache-dir \
+    opencv-python-headless==5.0.0.93 \
+    numpy==2.5.1 \
+    pydantic==2.13.4
+
+# Copy lambda handler
+COPY src/aws/lambda_function.py ${LAMBDA_TASK_ROOT}/lambda_function.py
+
+# Set the Lambda handler
+CMD [ "lambda_function.lambda_handler" ]
