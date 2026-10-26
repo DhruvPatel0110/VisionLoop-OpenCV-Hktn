@@ -24,3 +24,8 @@ htmlcov/
 # Data & Output scratch (keep sample test data)
 runs/
 data/sanity_output.png
+
+# Internal Planning Documents
+phases.txt
+idea.md
+

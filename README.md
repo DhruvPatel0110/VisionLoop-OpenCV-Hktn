@@ -13,6 +13,8 @@ Computer vision engineers spend countless hours manually tuning hyperparameters 
 
 **VisionLoop** is an autonomous developer agent designed for the **OpenCV AI Competition 2026 (powered by AWS)**. It iteratively runs computer-vision experiments on CPU and AWS cloud compute, evaluates perceptual quality using objective ground-truth F1 scoring or continuity proxies, enforces strict quality guardrails, and arrives at optimal parameter configurations backed by an immutable decision audit trail.
 
+> 📄 **Official Submission Report:** For the full competition documentation, mathematical formulation, agent workflow diagrams, and benchmark evidence, see the [VisionLoop Technical Report](docs/technical_report.md).
+
 ---
 
 ## 🖥️ Dashboard Architecture & Visual Design
